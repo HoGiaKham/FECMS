@@ -3,10 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { Modal, View, Text, TextInput, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-// Component này gần giống CreateAppModal nhưng có thêm logic để quản lý state của form
+
 const UpdateAppModal = ({ visible, onClose, item }) => {
-  // Tạo state để lưu trữ giá trị của các input
-  const [name, setName] = useState('');
+  const [name, setName] = useState(''); 
   const [createAt, setCreateAt] = useState('');
   const [id, setId] = useState('');
   const [version, setVersion] = useState('');
@@ -24,13 +23,10 @@ const UpdateAppModal = ({ visible, onClose, item }) => {
   }, [item]); // Hook này sẽ chạy lại mỗi khi prop 'item' thay đổi
 
   const handleSave = () => {
-    // Trong thực tế, bạn sẽ dispatch một action để update
-    // dispatch(updateApp({ id, name, version, ... }));
     console.log("Saving updated data:", { id, name, version });
     onClose(); // Đóng modal sau khi lưu
   };
 
-  // Nếu không có item, không render gì cả để tránh lỗi
   if (!item) return null;
 
   return (
@@ -45,7 +41,6 @@ const UpdateAppModal = ({ visible, onClose, item }) => {
           <Text style={styles.title}>Update Supper App</Text>
           <Text style={styles.subtitle}>Get a Quote Immediately Upon Form Submission</Text>
 
-          {/* Các ô Input giờ đã được kiểm soát bởi state */}
           <View style={styles.inputRow}>
             <View style={{ flex: 1, marginRight: 16 }}>
               <Text style={styles.label}>Name</Text>
@@ -95,7 +90,7 @@ const UpdateAppModal = ({ visible, onClose, item }) => {
   );
 };
 
-// ... copy styles từ CreateAppModal và điều chỉnh nếu cần ...
+
 const styles = StyleSheet.create({
   overlay:{flex:1,justifyContent:"center",alignItems:"center",backgroundColor:"rgba(0, 0, 0, 0.6)"},modalContainer:{width:"50%",maxWidth:600,backgroundColor:"white",borderRadius:16,padding:32,shadowColor:"#000",shadowOffset:{width:0,height:10},shadowOpacity:0.25,shadowRadius:20,elevation:20},title:{fontSize:24,fontFamily:"Inter_700Bold",textAlign:"center",marginBottom:8},subtitle:{fontSize:14,fontFamily:"Inter_400Regular",color:"#6c757d",textAlign:"center",marginBottom:24},inputRow:{flexDirection:"row",marginBottom:16},label:{fontSize:14,fontFamily:"Inter_500Medium",color:"#333",marginBottom:8},input:{height:44,borderWidth:1,borderColor:"#ced4da",borderRadius:8,paddingHorizontal:12,fontSize:16,fontFamily:"Inter_400Regular"},multilineInput:{height:80,textAlignVertical:"top",paddingTop:12},uploadBox:{borderWidth:2,borderColor:"#e0e0e0",borderStyle:"dashed",borderRadius:12,padding:24,alignItems:"center",justifyContent:"center",backgroundColor:"#f8f7ff",marginTop:8},uploadText:{marginTop:12,fontSize:16,fontFamily:"Inter_500Medium",color:"#495057"},uploadLink:{color:"#6200EE",fontFamily:"Inter_700Bold"},uploadSupportText:{marginTop:8,fontSize:12,color:"#6c757d"},saveButton:{backgroundColor:"#6200EE",paddingVertical:14,borderRadius:8,marginTop:24,alignItems:"center"},saveButtonText:{color:"white",fontSize:16,fontFamily:"Inter_700Bold"},
 });

@@ -1,5 +1,5 @@
 // screens/ManageScreen.js
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import { View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SideBar from '../components/SideBar';
@@ -7,21 +7,23 @@ import Header from '../components/Header';
 import ActionBar from '../components/ActionBar';
 import DataTable from '../components/DataTable';
 import CreateAppModal from '../components/CreateAppModal';
-//import Pagination from '../components/Pagination'; // Dòng này giờ sẽ không gây lỗi nữa
+import UpdateAppModal from '../components/UpdateAppModal'; // <-- BƯỚC 1: IMPORT
 
 const ManageScreen = () => {
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  //const totalItems = 2100;
-  //const itemsPerPage = 15;
-  //const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const [isCreateModalVisible, setCreateModalVisible] = useState(false);
 
-  /*const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      console.log("Chuyển đến trang:", page);
-      setCurrentPage(page);
-    }
-  };*/
+  const [isUpdateModalVisible, setUpdateModalVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleOpenUpdateModal = (item) => {
+    setSelectedItem(item);
+    setUpdateModalVisible(true);
+  };
+
+  const handleCloseUpdateModal = () => {
+    setUpdateModalVisible(false);
+    setSelectedItem(null); 
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -32,25 +34,26 @@ const ManageScreen = () => {
         
         <View style={styles.contentContainer}>
           <Header />
-          <ActionBar onAddNewApp={() => setModalVisible(true)} /> 
-          <DataTable />
-          {/* <Pagination 
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          /> */}
+          <ActionBar onAddNewApp={() => setCreateModalVisible(true)} /> 
+          
+          <DataTable onEditItem={handleOpenUpdateModal} />
         </View>
       </View>
 
       <CreateAppModal 
-        visible={isModalVisible} 
-        onClose={() => setModalVisible(false)} 
+        visible={isCreateModalVisible} 
+        onClose={() => setCreateModalVisible(false)} 
+      />
+
+      <UpdateAppModal
+        visible={isUpdateModalVisible}
+        onClose={handleCloseUpdateModal}
+        item={selectedItem}
       />
     </SafeAreaView>
   );
 };
 
-// ...Phần styles giữ nguyên như bạn đã có...
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -76,6 +79,5 @@ const styles = StyleSheet.create({
     padding: 32,
   },
 });
-
 
 export default ManageScreen;

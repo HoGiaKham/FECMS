@@ -8,7 +8,6 @@ const mockData = [
   { id: '162169', name: 'Fis Say', version: '0.1', createAt: '13/09/2025', updateAt: '14/09/2025', description: 'Submit Your Order' },
 ];
 
-
 const ActionButton = ({ iconName, color, onPress }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -22,20 +21,20 @@ const ActionButton = ({ iconName, color, onPress }) => {
       onPress={onPress}
       style={[
         styles.actionButton,
-        isHovered && { backgroundColor: color } // Khi hover thì đổi màu nền
+        isHovered && { backgroundColor: color }
       ]}
       {...webProps}
     >
       <Feather 
         name={iconName} 
         size={16} 
-        color={isHovered ? '#FFFFFF' : '#6c757d'} // Khi hover thì icon đổi màu trắng
+        color={isHovered ? '#FFFFFF' : '#6c757d'}
       />
     </TouchableOpacity>
   );
 };
 
-const DataTable = () => {
+const DataTable = ({ onEditItem }) => {
   const renderHeader = () => (
     <View style={styles.headerRow}>
         <Text style={[styles.headerCell, { flex: 0.5 }]}>STT</Text>
@@ -59,9 +58,8 @@ const DataTable = () => {
         <Text style={styles.dataCell}>{item.updateAt}</Text>
         <Text style={[styles.dataCell, { flex: 1.5 }]}>{item.description}</Text>
         
-        
         <View style={styles.actionsContainer}>
-            <ActionButton iconName="edit-2" color="#4A90E2" onPress={() => alert(`Editing item ${item.id}`)} />
+            <ActionButton iconName="edit-2" color="#4A90E2" onPress={() => onEditItem(item)} />
             <ActionButton iconName="trash-2" color="#D0021B" onPress={() => alert(`Deleting item ${item.id}`)} />
         </View>
     </View>
