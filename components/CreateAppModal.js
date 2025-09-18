@@ -3,7 +3,6 @@ import React from 'react';
 import { Modal, View, Text, TextInput, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-// Component Input tái sử dụng
 const FormInput = ({ label, placeholder, multiline = false, containerStyle }) => (
   <View style={containerStyle}>
     <Text style={styles.label}>{label}</Text>
@@ -26,7 +25,6 @@ const CreateAppModal = ({ visible, onClose }) => {
     >
       <Pressable style={styles.overlay} onPress={onClose}>
         <Pressable style={styles.modalContainer}>
-          {/* Ngăn việc click vào modal làm tắt modal */}
           <Text style={styles.title}>Create Supper App</Text>
           <Text style={styles.subtitle}>Get a Quote Immediately Upon Form Submission</Text>
 

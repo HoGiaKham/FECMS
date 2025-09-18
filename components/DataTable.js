@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Feather } from '@expo/vector-icons'; 
 
-// Dữ liệu mẫu 
-const mockData = [
-  { id: '162169', name: 'Fis Say', version: '0.1', createAt: '13/09/2025', updateAt: '14/09/2025', description: 'Submit Your Order' },
-];
+// // Dữ liệu mẫu 
+// const mockData = [
+//   { id: '162169', name: 'Fis Say', version: '0.1', createAt: '13/09/2025', updateAt: '14/09/2025', description: 'Submit Your Order' },
+// ];
 
 const ActionButton = ({ iconName, color, onPress }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -34,7 +34,7 @@ const ActionButton = ({ iconName, color, onPress }) => {
   );
 };
 
-const DataTable = ({ onEditItem }) => {
+const DataTable = ({ data = [], onEditItem }) => {
   const renderHeader = () => (
     <View style={styles.headerRow}>
         <Text style={[styles.headerCell, { flex: 0.5 }]}>STT</Text>
@@ -69,7 +69,7 @@ const DataTable = ({ onEditItem }) => {
     <View style={styles.container}>
       {renderHeader()}
       <FlatList
-        data={mockData}
+        data={data}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         ListEmptyComponent={() => (
